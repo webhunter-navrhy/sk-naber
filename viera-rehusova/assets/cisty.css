@@ -1,0 +1,268 @@
+/* Čistý vzhľad náborového webu (od 8. 10. 2026, prvý: Viera Rehušová, REMAX).
+   Načíta sa PO naber.css a prepíše ho: biely papier, bezpätkové písmo, farby kancelárie
+   bez tónovania fotiek, hero s portrétom makléra namiesto atmosférickej fotky.
+   Zapína sa v podkladoch makléra: "vzhled": "cisty" (+ voliteľne "farby": {…}). */
+
+:root {
+  --paper: #ffffff;
+  --paper-2: #f3f5f8;
+  --card: #ffffff;
+  --ink: #0d1424;
+  --ink-2: #2b3445;
+  --muted: #5b6577;
+  --line: rgba(13, 20, 36, .1);
+  --line-2: rgba(13, 20, 36, .2);
+  --gold: var(--c-red);
+  --gold-2: var(--c-red);
+  --gold-deep: var(--c-red-deep);
+  --gold-soft: rgba(225, 19, 0, .08);
+  --gold-night: #ffffff;
+  --night: var(--c-navy);
+  --night-rgb: 0, 14, 53;
+  --cream: #e9edf5;
+  --cream-hi: #ffffff;
+  --cream-rgb: 233, 237, 245;
+  --paper-rgb: 255, 255, 255;
+  --tint: transparent;
+  --serif: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sans: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --space: clamp(4.5rem, 9vw, 7.5rem);
+  --r: 10px;
+}
+
+body { font-weight: 400; font-size: 16.5px; }
+.h1, .h2, .cta__title, .about__name, .town__word, .quote blockquote {
+  font-family: var(--sans); font-weight: 800; letter-spacing: -.035em;
+}
+.h1 { font-size: clamp(2.6rem, 5.2vw, 4.6rem); line-height: 1.02; }
+.h2 { font-size: clamp(2rem, 3.6vw, 3.2rem); line-height: 1.06; }
+.h1 em, .h2 em, .cta__title em, .about__name em, .quote em { font-style: normal; }
+.h2 em { color: var(--c-red); }
+.eyebrow { font-weight: 700; letter-spacing: .14em; color: var(--c-blue); }
+.eyebrow--light { color: #fff; opacity: .8; }
+.btn { font-weight: 700; border-radius: 10px; }
+.btn--gold { background: var(--c-red); color: #fff; }
+.btn--gold:hover { background: var(--c-red-deep); }
+.btn--dark { background: var(--c-navy); color: #fff; }
+.btn--dark:hover { background: #000; }
+.btn--line:hover { border-color: var(--c-blue); color: var(--c-blue); }
+
+/* hlavička — vždy biela, logo kancelárie vľavo */
+.top, .top--over:not(.is-solid) {
+  background: rgba(255, 255, 255, .96); color: var(--ink); border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+.top--over:not(.is-solid) .top__logo { filter: none; }
+.top__logo { height: 40px; max-width: 120px; }
+.top__name { font-family: var(--sans); font-weight: 800; font-size: 1.15rem; letter-spacing: -.01em; }
+.top__role { letter-spacing: .08em; font-weight: 600; opacity: 1; color: var(--muted); }
+.top__nav a:hover { color: var(--c-blue); opacity: 1; }
+.top__cta, .top--over:not(.is-solid) .top__cta { background: var(--c-red); color: #fff; border-color: var(--c-red); }
+.top__cta:hover, .top--over:not(.is-solid) .top__cta:hover { background: var(--c-red-deep); border-color: var(--c-red-deep); color: #fff; }
+.top__agency, .top--over:not(.is-solid) .top__agency { color: var(--ink); }
+
+/* hero — svetlý, bez fotky; portrét makléra pri texte */
+.hero { min-height: 0; display: block; color: var(--ink); background: linear-gradient(180deg, #f3f6fb 0%, #ffffff 100%); }
+.hero::before, .hero::after, .hero__bg { display: none; }
+.hero__grid { align-items: center; padding-top: clamp(7.5rem, 11vw, 9.5rem); padding-bottom: clamp(3rem, 6vw, 5.5rem); grid-template-columns: minmax(0, 1.1fr) minmax(0, 460px); }
+.hero .h1 { color: var(--ink); text-shadow: none; }
+.hero .h1 em { color: var(--c-red); }
+.hero .lead { color: var(--ink-2); max-width: 34rem; }
+.hero .eyebrow--light { color: var(--c-blue); opacity: 1; }
+.hero__agent {
+  margin-top: 2.25rem; padding: 1rem 1.25rem 1rem 1rem; border: 1px solid var(--line); border-top: 1px solid var(--line);
+  border-radius: 14px; background: #fff; color: var(--muted); box-shadow: 0 12px 30px -18px rgba(0, 14, 53, .35); max-width: 30rem;
+}
+.hero__agent img { width: 76px; height: 76px; border-radius: 12px; object-position: 50% 12%; }
+.hero__agent strong { color: var(--ink); font-weight: 800; font-size: 1.02rem; }
+.hero__agent a { color: var(--c-blue); font-weight: 700; }
+.hero__trust { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; margin: 1.4rem 0 0; padding: 0; list-style: none; font-size: .88rem; color: var(--ink-2); }
+.hero__trust li { display: flex; align-items: center; gap: .45rem; }
+.hero__trust li::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--c-red); flex: none; }
+
+/* kalkulačka */
+.calc { border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 30px 70px -35px rgba(0, 14, 53, .45); }
+.calc__step { font-family: var(--sans); font-weight: 800; font-size: 1.35rem; letter-spacing: -.02em; }
+.calc__logo { height: 30px; }
+.calc legend, .field > span, .calc__label { font-weight: 700; letter-spacing: .08em; }
+.seg { background: var(--paper-2); border-radius: 10px; }
+.seg__opt input:checked + span { background: var(--c-navy); color: #fff; font-weight: 700; box-shadow: none; }
+.calc__price { font-family: var(--sans); font-weight: 800; letter-spacing: -.03em; color: var(--ink); }
+.ruler__band { background: rgba(0, 67, 255, .12); border-color: var(--c-blue); }
+.ruler__median { background: var(--c-blue); }
+.ruler__pin, .ruler__pin span { background: var(--c-red); color: #fff; }
+.calc__done strong { font-family: var(--sans); font-weight: 800; font-size: 1.3rem; }
+.calc__zdroj { margin: .7rem 0 0; padding: .6rem .75rem; border-radius: 8px; background: var(--paper-2); font-size: .76rem; line-height: 1.45; color: var(--ink-2); }
+.calc__zdroj b { font-weight: 700; }
+
+/* trh — svetlý, mesto ako fotografia v ráme (nie duotón) */
+.market { background: var(--paper-2); color: var(--ink); }
+.market--town { padding-top: var(--space); }
+.market .h2 { color: var(--ink); }
+.market .h2 em { color: var(--c-red); }
+.market .eyebrow--light { color: var(--c-blue); opacity: 1; }
+.town { height: clamp(260px, 42vw, 460px); margin: 0 var(--gutter) clamp(2.5rem, 5vw, 4rem); max-width: calc(var(--max) - 2 * var(--gutter)); border-radius: 18px; }
+@media (min-width: 1320px) { .town { margin-left: auto; margin-right: auto; } }
+.town::after { background: linear-gradient(180deg, rgba(0, 14, 53, 0) 40%, rgba(0, 14, 53, .65) 100%); }
+.town__word { font-family: var(--sans); font-weight: 800; left: clamp(1.25rem, 3vw, 2.5rem); right: auto; bottom: clamp(1rem, 2.5vw, 2rem); text-align: left; font-size: clamp(2.6rem, 6vw, 5rem); letter-spacing: -.03em; color: #fff; text-shadow: none; }
+.town__credit { top: auto; bottom: 1rem; color: rgba(255, 255, 255, .75); }
+.facts { border-top: 0; gap: 1rem; margin-top: 2.5rem; }
+.fact, .fact + .fact { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 1.6rem 1.4rem; }
+.fact__num { font-family: var(--sans); font-weight: 800; letter-spacing: -.03em; color: var(--ink); font-size: clamp(2rem, 3.4vw, 2.9rem); }
+.fact__num small { color: var(--c-red); font-weight: 700; }
+.fact__lbl { color: var(--muted); }
+.market__col h3 { color: var(--muted); font-weight: 700; letter-spacing: .1em; }
+.bars li { border-bottom-color: var(--line); }
+.bar__k { color: var(--ink-2); }
+.bar__track { background: rgba(13, 20, 36, .08); }
+.bar__fill { background: var(--c-blue); opacity: .55; }
+.bar__v { font-family: var(--sans); font-weight: 800; font-size: 1.1rem; color: var(--ink); }
+.bar__s { color: var(--muted); }
+.bars--cmp .is-own .bar__fill { background: var(--c-red); opacity: 1; }
+.bars--cmp .is-own .bar__k, .bars--cmp .is-own .bar__v { color: var(--c-red); }
+.bars--cmp a:hover .bar__k { color: var(--c-blue); }
+.market__src { color: var(--muted); }
+.map__head h3 { font-family: var(--sans); font-weight: 800; color: var(--ink); letter-spacing: -.02em; }
+.map__head p, .map__legend { color: var(--muted); }
+.map__svg path { stroke: #fff; }
+.map__svg .m0 { fill: #e6e9ef; }
+.map__svg .m1 { fill: #c9d6fb; }
+.map__svg .m2 { fill: #9bb4fa; }
+.map__svg .m3 { fill: #6690fb; }
+.map__svg .m4 { fill: #2f66fd; }
+.map__svg .m5 { fill: var(--c-navy); }
+.map__svg .is-own { stroke: var(--c-red); stroke-width: 2.6; }
+.map__legend .m1 { background: #c9d6fb; } .map__legend .m2 { background: #9bb4fa; } .map__legend .m3 { background: #6690fb; }
+.map__legend .m4 { background: #2f66fd; } .map__legend .m5 { background: var(--c-navy); }
+.map__tip { background: var(--c-navy); color: #fff; }
+.map__tip b { font-family: var(--sans); font-weight: 800; }
+
+/* sekcia „z čoho vychádza odhad“ */
+.zdroj { padding: var(--space) 0 0; }
+.zdroj__grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; }
+.zdroj__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+.zdroj__list li { padding: 1.3rem 1.4rem; border: 1px solid var(--line); border-radius: 14px; background: #fff; }
+.zdroj__list b { display: block; font-weight: 800; margin-bottom: .3rem; color: var(--ink); }
+.zdroj__list p { margin: 0; color: var(--muted); font-size: .93rem; }
+.zdroj__list a { color: var(--c-blue); }
+
+/* postup */
+.step__n { font-family: var(--sans); font-weight: 800; color: var(--c-red); font-size: 1.6rem; }
+.step h3 { font-family: var(--sans); font-weight: 800; font-size: clamp(1.25rem, 1.8vw, 1.5rem); letter-spacing: -.02em; }
+.steps__photo img { border-radius: 18px; }
+.step__lehota { background: rgba(0, 67, 255, .08); color: var(--c-blue); font-weight: 700; }
+
+/* ponuka */
+.card__img { border-radius: 14px; }
+.card__title { font-family: var(--sans); font-weight: 800; font-size: clamp(1.1rem, 1.5vw, 1.3rem); letter-spacing: -.02em; }
+.card__price { color: var(--c-red); font-weight: 800; }
+.card__tag { background: var(--c-red); color: #fff; font-weight: 700; }
+.cards--2 .card:nth-child(2) { margin-top: 0; }
+.cards--2 .card:nth-child(2) .card__img { aspect-ratio: 4 / 3; }
+
+/* citát — bez fotky, tmavomodrý pás */
+.quote { min-height: 0; padding: clamp(4rem, 8vw, 6.5rem) 0; background: var(--c-navy); }
+.quote__bg, .quote::before, .quote::after { display: none; }
+.quote blockquote { font-size: clamp(1.7rem, 3vw, 2.6rem); line-height: 1.18; max-width: 30ch; color: #fff; font-weight: 700; }
+.quote em { color: #ff8a7a; }
+.quote p { color: rgba(255, 255, 255, .75); }
+
+/* o mne */
+.about { background: var(--paper-2); }
+.about__name { font-size: clamp(2.6rem, 6vw, 5rem); line-height: 1; letter-spacing: -.04em; }
+.about__name em { color: var(--c-red); padding-left: 0; display: inline; }
+.about__name span { display: inline; }
+.about__grid { margin-top: 2rem; align-items: center; grid-template-columns: minmax(0, 1fr) minmax(0, 380px); }
+.about__lead { font-family: var(--sans); font-weight: 500; font-size: clamp(1.1rem, 1.5vw, 1.3rem); line-height: 1.5; }
+.about__photo { border-radius: 18px; box-shadow: 0 30px 60px -35px rgba(0, 14, 53, .5); }
+.about__nums b { font-family: var(--sans); font-weight: 800; color: var(--c-red); }
+
+/* recenzie — skutočné hodnotenia z profilu */
+.reviews { padding: var(--space) 0; }
+.reviews__head { display: flex; justify-content: space-between; align-items: end; gap: 1rem 2rem; flex-wrap: wrap; margin-bottom: 2rem; }
+.reviews__head .h2 { margin: 0; }
+.reviews__score { font-size: .9rem; color: var(--muted); }
+.reviews__score b { font-size: 2.2rem; font-weight: 800; color: var(--ink); letter-spacing: -.03em; margin-right: .3rem; }
+.review { border-radius: 14px; }
+.review blockquote { font-family: var(--sans); font-weight: 500; font-size: 1.02rem; line-height: 1.55; }
+.review figcaption { font-weight: 700; color: var(--ink-2); }
+.review figcaption span { font-weight: 400; color: var(--muted); }
+
+/* predané */
+.sold { padding: 0 0 var(--space); }
+.sold__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 2rem; }
+.sold__item { display: block; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: #fff; }
+.sold__img { position: relative; display: block; aspect-ratio: 4 / 3; background: var(--paper-2); }
+.sold__img img { width: 100%; height: 100%; object-fit: cover; }
+.sold__tag { position: absolute; left: .8rem; top: .8rem; background: var(--c-navy); color: #fff; font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: .3rem .6rem; border-radius: 6px; }
+.sold__body { display: block; padding: 1rem 1.1rem 1.2rem; }
+.sold__body b { display: block; font-weight: 700; font-size: .95rem; line-height: 1.35; }
+.sold__body span { display: block; margin-top: .3rem; font-size: .8rem; color: var(--muted); }
+
+/* otázky */
+.faq__item summary { font-family: var(--sans); font-weight: 700; font-size: clamp(1.02rem, 1.4vw, 1.2rem); }
+
+/* koľko zostane, porovnanie, príprava */
+.net__card { border-radius: 18px; }
+.net__total dd { font-family: var(--sans); font-weight: 800; color: var(--c-red); }
+.versus thead th { font-family: var(--sans); font-weight: 800; font-size: 1.1rem; }
+.versus td:last-child, .versus thead th:last-child { background: rgba(0, 67, 255, .06); }
+.versus thead th:last-child { color: var(--c-blue); }
+.docs h3 { font-family: var(--sans); font-weight: 800; font-size: 1.3rem; }
+.stage { border-radius: 18px; }
+
+/* strážca ceny */
+.watch { background: var(--c-navy); }
+.watch .h2 em { color: #ff8a7a; }
+.watch .eyebrow--light { color: #fff; }
+.watch__form { border-radius: 18px; }
+
+/* výzva — bez fotky */
+.cta { background: var(--c-navy); padding: clamp(4.5rem, 9vw, 7rem) 0; }
+.cta__bg, .cta::before, .cta::after { display: none; }
+.cta__title { font-size: clamp(2.4rem, 5vw, 4.2rem); line-height: 1.02; color: #fff; }
+.cta__title em { color: #ff8a7a; }
+.cta__lead { color: rgba(255, 255, 255, .8); }
+.cta .btn--dark { background: var(--c-red); color: #fff; }
+.cta .btn--line { border-color: rgba(255, 255, 255, .4); color: #fff; }
+.cta .btn--line:hover { border-color: #fff; color: #fff; }
+
+/* landing */
+.reason__n { font-family: var(--sans); font-weight: 800; color: var(--c-red); font-size: 1.6rem; }
+.reason h3 { font-family: var(--sans); font-weight: 800; font-size: 1.3rem; }
+.legal h2 { font-family: var(--sans); font-weight: 800; font-size: 1.25rem; }
+
+/* okresy makléra */
+.okr__name { font-family: var(--sans); font-weight: 800; }
+.okr__more { color: var(--c-blue); }
+
+/* pätička */
+.foot { border-top: 1px solid var(--line); }
+.foot__brand img { height: 34px; }
+
+/* lišta na mobile */
+.dock { background: rgba(0, 14, 53, .95); }
+.dock .dock__cta { background: var(--c-red); }
+
+@media (max-width: 960px) {
+  .hero { display: block; background: linear-gradient(180deg, #f3f6fb 0%, #ffffff 100%); }
+  .hero__grid { grid-template-columns: minmax(0, 1fr); gap: 0; padding-top: 0; padding-bottom: 0; }
+  .hero__text { min-height: 0; display: block; padding: 6.5rem 0 2rem; }
+  .hero__calc { margin-top: 0; padding-bottom: 3rem; }
+  .zdroj__grid { grid-template-columns: minmax(0, 1fr); }
+  .about__photo { max-width: 340px; }
+}
+@media (max-width: 600px) {
+  .h1 { font-size: clamp(2.2rem, 10vw, 2.9rem); }
+  .top__logo { height: 32px; max-width: 80px; }
+  .top__name { font-size: 1rem; }
+  .hero__agent img { width: 60px; height: 60px; }
+  .facts { gap: .6rem; }
+  .fact, .fact + .fact, .fact:nth-child(3) { padding: 1.1rem 1rem; }
+  .fact__num { font-size: 1.7rem; }
+  .town { height: 240px; min-height: 0; margin-left: 12px; margin-right: 12px; }
+  .about__name { font-size: 2.4rem; }
+}
+.sold__item { margin: 0; }
+.reviews__grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+@media (max-width: 600px) { .reviews__grid { grid-template-columns: minmax(0, 1fr); } .sold__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
